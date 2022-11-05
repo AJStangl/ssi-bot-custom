@@ -1,14 +1,30 @@
-from praw_file.reddit import Reddit
+from praw.reddit import Reddit
+from praw.models import Message
+import random
 
-reddit = Reddit(
-    client_id="flcEUCJ5JkVDxh8w0oVLaw",
-    client_secret="a6ZQWE1otbrkcf_qPmPmHyuWsDW9vg",
-    user_agent="script:%(bot_name)s:v%(bot_version)s (by /u/%(bot_author)s)"
-)
-print(reddit.read_only)
-try:
-    for submission in reddit.subreddit("SubSimGPT2Interactive").new(limit=4):
-        try:
-            print(submission.id)
-        except Exception as e: print(e)
-except Exception as e: print(e)
+import logging
+
+def poll_inbox_stream(instance: Reddit):
+    for praw_thing in instance.inbox.stream(pause_after=0):
+        if isinstance(praw_thing, Message):
+            print("found a message")
+        else:
+            print(f"found something else {type(praw_thing)}")
+        if praw_thing is None:
+            break
+
+        record = None
+
+        if not record:
+            print("record is None")
+            continue
+
+
+if __name__ == '__main__':
+    instance: Reddit = Reddit(site_name="Pablobot-GPT2")
+    while True:
+        poll_inbox_stream(instance)
+
+
+
+

@@ -9,8 +9,8 @@ import difflib
 from configparser import ConfigParser
 from datetime import datetime, timedelta
 
-import praw_ssi_local as praw
-from praw_ssi_local.models import (Submission as praw_Submission, Comment as praw_Comment, Message as praw_Message)
+import praw
+from praw.models import (Submission as praw_Submission, Comment as praw_Comment, Message as praw_Message)
 from peewee import fn
 import pyimgur
 

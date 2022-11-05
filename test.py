@@ -1,4 +1,4 @@
-from praw_ssi_file.reddit import Reddit
+from praw.reddit import Reddit
 import logging
 
 handler = logging.StreamHandler()

@@ -1,8 +1,7 @@
 beautifulsoup4
 detoxify==0.4.0
 nltk
-peewee
-praw
+git+https://github.com/AJStangl/praw2@master
 psutil
 pyimgur
 pytest
