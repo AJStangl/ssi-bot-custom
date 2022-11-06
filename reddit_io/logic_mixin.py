@@ -111,6 +111,7 @@ class LogicMixin(TaggingMixin):
 		elif isinstance(praw_thing, praw_Comment):
 			# otherwise it's a comment
 			thing_text_content = praw_thing.body
+			# TODO: This is broken...
 			# navigate to the parent submission to get the link_flair_text
 			submission_link_flair_text = praw_thing.submission.link_flair_text or ''
 			submission_created_utc = datetime.utcfromtimestamp(praw_thing.submission.created_utc)
