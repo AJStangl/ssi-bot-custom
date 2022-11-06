@@ -5,7 +5,7 @@ import random
 import threading
 import time
 
-import praw
+import pbfaw as praw
 import difflib
 from configparser import ConfigParser
 from datetime import datetime, timedelta
@@ -119,7 +119,7 @@ class RedditIO(threading.Thread, LogicMixin):
 
 		# start a reddit instance
 		# this will automatically pick up the configuration from praw.ini
-		self._praw = praw.Reddit(self._bot_username, timeout=64)
+		self._praw = praw.Reddit(self._bot_username, timeout=64, ratelimit_seconds=600)
 
 	def run(self):
 

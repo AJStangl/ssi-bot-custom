@@ -197,7 +197,7 @@ class LogicMixin(TaggingMixin):
 		reply_probability = min(base_probability, 1)
 
 		# work out the age of submission in hours
-		age_of_submission = (datetime.utcnow() - submission_created_utc).total_seconds() / 3600
+		age_of_submission = (datetime.utcnow() - datetime.utcfromtimestamp(praw_thing.created_utc)).total_seconds() / 3600
 		# calculate rate of decay over x hours
 		rate_of_decay = max(0, 1 - (age_of_submission / 24))
 		# multiply the rate of decay by the reply probability
