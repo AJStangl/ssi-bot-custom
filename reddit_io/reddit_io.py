@@ -4,13 +4,13 @@ import logging
 import random
 import threading
 import time
-import regex as re
+
+import praw
 import difflib
 from configparser import ConfigParser
 from datetime import datetime, timedelta
 
-import pbfaw as praw
-from pbfaw.models import (Submission as praw_Submission, Comment as praw_Comment, Message as praw_Message)
+from praw.models import (Submission as praw_Submission, Comment as praw_Comment, Message as praw_Message)
 from peewee import fn
 import pyimgur
 
