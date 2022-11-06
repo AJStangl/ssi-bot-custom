@@ -1,5 +1,8 @@
-from praw.reddit import Reddit
+from pbfaw.reddit import Reddit
 import logging
+from  pbfaw.models.util import stream_generator
+from pbfaw.models import MoreComments
+
 
 handler = logging.StreamHandler()
 handler.setLevel(logging.DEBUG)
@@ -19,9 +22,19 @@ try:
     #print(submission.id)
     #test = reddit.subreddit("SubSimps").new(limit=10)
     #print(test)
+    #inbox_stream = stream_generator(reddit.inbox.messages, pause_after=-1, skip_existing=True)
+    while True:
+        for unread in reddit.inbox.unread():
+            print(unread)
+
     subreddit1 = reddit.subreddit("SubSimps").new(limit=10)
-    for submission in reddit.subreddit("SubSimps").new(limit=10):
+    for submission in reddit.subreddit("SubSimps").new(limit=100):
         try:
-            print(submission["data"]["id"])
+            print(submission.fullname)
+            submission.comments.replace_more(limit=None)
+            comment_queue = submission.comments[:]  # Seed with top-level
+            while comment_queue:
+                comment = comment_queue.pop(0)
+                print(comment.fullname + ":" + comment.body)
         except Exception as e: print(e)
 except Exception as e: print(e)
